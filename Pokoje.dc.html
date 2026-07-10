@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Pokoje — Stary Spichrz, Chełmno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;padding:0;background:#FBF9F4;color:#1B1712;}
+    body{font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#1B1712;text-decoration:none;}
+    a:hover{color:#8A6A48;}
+    ::selection{background:#8A6A48;color:#fff;}
+  </style>
+</helmet>
+
+<div style="min-width:1100px">
+
+  <header data-screen-label="Nawigacja" style="position:sticky;top:0;z-index:50;background:rgba(251,249,244,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #E8E1D4">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+      <a href="Start.dc.html" style="display:flex;align-items:baseline;gap:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:0.02em">Stary Spichrz</span>
+        <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8A6A48">1797</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:34px;font-size:14px;letter-spacing:0.08em;text-transform:uppercase">
+        <a href="Start.dc.html">{{ t.navStart }}</a>
+        <a href="Pokoje.dc.html" style="color:#8A6A48">{{ t.navRooms }}</a>
+        <a href="Restauracja.dc.html">{{ t.navRest }}</a>
+        <a href="Galeria.dc.html">{{ t.navGallery }}</a>
+        <a href="Kontakt.dc.html">{{ t.navContact }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #D8CFBF;border-radius:999px;padding:7px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;color:#1B1712" style-hover="border-color:#8A6A48;color:#8A6A48">{{ otherLang }}</button>
+        <a href="{{ bookingUrl }}" target="_blank" style="background:#17130F;color:#FBF9F4;padding:12px 26px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.navBook }}</a>
+      </div>
+    </div>
+  </header>
+
+  <section data-screen-label="Nagłówek pokoi" style="max-width:1240px;margin:0 auto;padding:80px 40px 64px;text-align:center">
+    <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.kicker }}</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:60px;margin:0 0 22px">{{ t.title }}</h1>
+    <p style="font-size:18px;font-weight:300;line-height:1.75;color:#4E463C;max-width:640px;margin:0 auto;text-wrap:pretty">{{ t.intro }}</p>
+  </section>
+
+  <section data-screen-label="Lista pokoi" style="max-width:1240px;margin:0 auto;padding:0 40px 40px;display:flex;flex-direction:column;gap:56px">
+    <sc-for list="{{ rooms }}" as="room" hint-placeholder-count="3">
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;border-top:1px solid #E8E1D4;padding-top:56px">
+        <div style="height:400px">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ room.slotId }}" shape="rect" placeholder="{{ room.placeholder }}" hint-size="100%,400px" style="width:100%;height:100%"></x-import>
+        </div>
+        <div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:38px;margin:0 0 16px">{{ room.name }}</h2>
+          <p style="font-size:17px;font-weight:300;line-height:1.75;color:#4E463C;margin:0 0 28px;text-wrap:pretty">{{ room.desc }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px">
+            <sc-for list="{{ room.features }}" as="f" hint-placeholder-count="4">
+              <span style="border:1px solid #E8E1D4;background:#F5F1E8;padding:8px 16px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4E463C">{{ f }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:26px">
+            <div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600">{{ room.price }}</div>
+              <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#8A6A48;margin-top:2px">{{ t.perNight }}</div>
+            </div>
+            <a href="{{ bookingUrl }}" target="_blank" style="background:#17130F;color:#FBF9F4;padding:15px 32px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.book }}</a>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section data-screen-label="Udogodnienia" style="background:#F5F1E8;border-top:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4;margin-top:60px">
+    <div style="max-width:1240px;margin:0 auto;padding:90px 40px">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;margin:0 0 48px;text-align:center">{{ t.amTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-left:1px solid #E8E1D4;border-top:1px solid #E8E1D4">
+        <sc-for list="{{ amenities }}" as="am" hint-placeholder-count="12">
+          <div style="border-right:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4;padding:24px 28px;background:#FBF9F4;font-size:14px;letter-spacing:0.06em;color:#4E463C">{{ am }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Doba hotelowa" style="max-width:1240px;margin:0 auto;padding:80px 40px;display:flex;justify-content:center;gap:80px;text-align:center">
+    <div>
+      <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:10px">{{ t.checkin }}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600">14:00</div>
+    </div>
+    <div style="width:1px;background:#E8E1D4"></div>
+    <div>
+      <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:10px">{{ t.checkout }}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600">11:00</div>
+    </div>
+    <div style="width:1px;background:#E8E1D4"></div>
+    <div>
+      <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:10px">{{ t.phone }}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600"><a href="tel:+48537311090" style="color:#1B1712" style-hover="color:#8A6A48">537 311 090</a></div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:30px 40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:300;color:#B7AC9C">
+      <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
+      <span>Podmurna 7, 86-200 Chełmno · <a href="tel:+48537311090" style="color:#B99A72" style-hover="color:#FBF9F4">537 311 090</a></span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bookingUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.booking.com/hotel/pl/stary-spichrz.html&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ustawienia&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = localStorage.getItem('ss-lang'); } catch (e) {}
+    this.state = { lang: saved || 'pl' };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const T = {
+      pl: {
+        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navBook: 'Rezerwuj',
+        kicker: 'Noclegi', title: 'Pokoje i apartamenty',
+        intro: 'Sześć przytulnych pokoi w zabytkowym spichlerzu. Każdy z centralnym ogrzewaniem, łóżkiem podwójnym i sofą — z możliwością dostawki. Śniadanie wliczone w cenę pobytu.',
+        perNight: 'za noc', book: 'Rezerwuj',
+        amTitle: 'Udogodnienia dla gości',
+        checkin: 'Zameldowanie od', checkout: 'Wymeldowanie do', phone: 'Rezerwacja telefoniczna',
+      },
+      en: {
+        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navBook: 'Book now',
+        kicker: 'Stay', title: 'Rooms & apartments',
+        intro: 'Six cosy rooms in a historic granary. Each with central heating, a double bed and a sofa — extra beds available. Breakfast included in the rate.',
+        perNight: 'per night', book: 'Book now',
+        amTitle: 'Guest amenities',
+        checkin: 'Check-in from', checkout: 'Check-out by', phone: 'Book by phone',
+      },
+    };
+
+    const roomsData = {
+      pl: [
+        { slotId: 'rooms-dwuosobowy', name: 'Pokój dwuosobowy', placeholder: 'Zdjęcie pokoju dwuosobowego',
+          desc: 'Przytulny pokój z łóżkiem podwójnym i sofą, idealny dla par zwiedzających starówkę Chełmna.',
+          features: ['Łóżko podwójne', 'Sofa', 'Centralne ogrzewanie', 'Wi-Fi gratis', 'Śniadanie w cenie'], price: 'od 296 zł' },
+        { slotId: 'rooms-rodzinny', name: 'Pokój rodzinny', placeholder: 'Zdjęcie pokoju rodzinnego',
+          desc: 'Przestronny pokój dla rodzin z dziećmi, z możliwością dostawki. Dostępne pokoje dla niepalących.',
+          features: ['2–4 osoby', 'Możliwość dostawki', 'Dla niepalących', 'Wi-Fi gratis', 'Śniadanie w cenie'], price: 'od 350 zł' },
+        { slotId: 'rooms-apartament', name: 'Apartament', placeholder: 'Zdjęcie apartamentu',
+          desc: 'Najbardziej przestronna opcja w spichlerzu — komfortowa przestrzeń dzienna i sypialna z widokiem na starówkę.',
+          features: ['Do 4 osób', 'Część dzienna', 'Wi-Fi gratis', 'Serwis pokojowy', 'Śniadanie w cenie'], price: 'od 420 zł' },
+      ],
+      en: [
+        { slotId: 'rooms-dwuosobowy', name: 'Double room', placeholder: 'Double room photo',
+          desc: "A cosy room with a double bed and a sofa, perfect for couples exploring Chełmno's old town.",
+          features: ['Double bed', 'Sofa', 'Central heating', 'Free Wi-Fi', 'Breakfast included'], price: 'from 296 zł' },
+        { slotId: 'rooms-rodzinny', name: 'Family room', placeholder: 'Family room photo',
+          desc: 'A spacious room for families with children, with an extra bed available. Non-smoking rooms available.',
+          features: ['Sleeps 2–4', 'Extra bed', 'Non-smoking', 'Free Wi-Fi', 'Breakfast included'], price: 'from 350 zł' },
+        { slotId: 'rooms-apartament', name: 'Apartment', placeholder: 'Apartment photo',
+          desc: 'The most spacious option in the granary — a comfortable living and sleeping space with old-town views.',
+          features: ['Up to 4 guests', 'Living area', 'Free Wi-Fi', 'Room service', 'Breakfast included'], price: 'from 420 zł' },
+      ],
+    };
+
+    const amenitiesData = {
+      pl: ['Bezpłatne Wi-Fi', 'Śniadanie w cenie', 'Bezpłatny parking', 'Restauracja i bar', 'Wypożyczalnia rowerów', 'Transfer hotelowy', 'Serwis pokojowy', 'Przechowalnia bagażu', 'Kantor wymiany walut', '24-godzinna ochrona', 'Wielojęzyczny personel', 'Pokoje dla niepalących'],
+      en: ['Free Wi-Fi', 'Breakfast included', 'Free parking', 'Restaurant & bar', 'Bike rental', 'Hotel transfer', 'Room service', 'Luggage storage', 'Currency exchange', '24-hour security', 'Multilingual staff', 'Non-smoking rooms'],
+    };
+
+    return {
+      t: T[lang],
+      otherLang: lang === 'pl' ? 'EN' : 'PL',
+      toggleLang: () => {
+        const next = lang === 'pl' ? 'en' : 'pl';
+        try { localStorage.setItem('ss-lang', next); } catch (e) {}
+        this.setState({ lang: next });
+      },
+      bookingUrl: this.props.bookingUrl ?? 'https://www.booking.com/hotel/pl/stary-spichrz.html',
+      rooms: roomsData[lang],
+      amenities: amenitiesData[lang],
+    };
+  }
+}
+</script>
+</body>
+</html>

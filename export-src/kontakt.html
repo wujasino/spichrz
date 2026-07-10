@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__IMAGE_SLOT_STATE = {};</script>
+<script src="./image-slot.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Kontakt — Stary Spichrz, Chełmno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;padding:0;background:#FBF9F4;color:#1B1712;}
+    body{font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#1B1712;text-decoration:none;}
+    a:hover{color:#8A6A48;}
+    ::selection{background:#8A6A48;color:#fff;}
+  </style>
+</helmet>
+
+<div style="min-width:1100px">
+
+  <header data-screen-label="Nawigacja" style="position:sticky;top:0;z-index:50;background:rgba(251,249,244,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #E8E1D4">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+      <a href="index.html" style="display:flex;align-items:baseline;gap:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:0.02em">Stary Spichrz</span>
+        <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8A6A48">1797</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:34px;font-size:14px;letter-spacing:0.08em;text-transform:uppercase">
+        <a href="index.html">{{ t.navStart }}</a>
+        <a href="pokoje.html">{{ t.navRooms }}</a>
+        <a href="restauracja.html">{{ t.navRest }}</a>
+        <a href="galeria.html">{{ t.navGallery }}</a>
+        <a href="kontakt.html" style="color:#8A6A48">{{ t.navContact }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #D8CFBF;border-radius:999px;padding:7px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;color:#1B1712" style-hover="border-color:#8A6A48;color:#8A6A48">{{ otherLang }}</button>
+        <a href="{{ bookingUrl }}" target="_blank" style="background:#17130F;color:#FBF9F4;padding:12px 26px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.navBook }}</a>
+      </div>
+    </div>
+  </header>
+
+  <section data-screen-label="Kontakt" style="max-width:1240px;margin:0 auto;padding:80px 40px 100px;display:grid;grid-template-columns:1fr 1.2fr;gap:80px">
+    <div>
+      <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.kicker }}</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:56px;margin:0 0 40px">{{ t.title }}</h1>
+
+      <div style="display:flex;flex-direction:column;gap:34px">
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">{{ t.address }}</div>
+          <div style="font-size:20px;font-weight:300;line-height:1.6">Podmurna 7<br>86-200 Chełmno</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">{{ t.phone }}</div>
+          <div style="font-size:20px;font-weight:300"><a href="tel:+48537311090" style-hover="color:#8A6A48">537 311 090</a></div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">{{ t.hours }}</div>
+          <div style="font-size:20px;font-weight:300;line-height:1.6">{{ t.checkin }}: 14:00<br>{{ t.checkout }}: 11:00</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">{{ t.parking }}</div>
+          <div style="font-size:17px;font-weight:300;line-height:1.7;color:#4E463C;text-wrap:pretty">{{ t.parkingInfo }}</div>
+        </div>
+        <div style="display:flex;gap:14px;margin-top:6px">
+          <a href="https://maps.google.com/?q=Podmurna+7,+86-200+Chełmno" target="_blank" style="background:#17130F;color:#FBF9F4;padding:14px 28px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.mapCta }}</a>
+          <a href="{{ bookingUrl }}" target="_blank" style="border:1px solid #1B1712;padding:13px 28px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="border-color:#8A6A48;color:#8A6A48">{{ t.navBook }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="flex:1;min-height:420px">
+        <x-import component-from-global-scope="image-slot" id="kontakt-mapa" shape="rect" placeholder="Zrzut mapy Google (Podmurna 7, Chełmno)" hint-size="100%,420px" style="width:100%;height:100%"></x-import>
+      </div>
+      <div style="background:#F5F1E8;border:1px solid #E8E1D4;padding:30px 34px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">Plus Code</div>
+          <div style="font-size:17px;font-weight:300">9C2H+2C Chełmno</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:8px">{{ t.transfer }}</div>
+          <div style="font-size:17px;font-weight:300;line-height:1.5">{{ t.transferInfo }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:30px 40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:300;color:#B7AC9C">
+      <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
+      <span>Podmurna 7, 86-200 Chełmno · <a href="tel:+48537311090" style="color:#B99A72" style-hover="color:#FBF9F4">537 311 090</a></span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = localStorage.getItem('ss-lang'); } catch (e) {}
+    this.state = { lang: saved || 'pl' };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const T = {
+      pl: {
+        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navBook: 'Rezerwuj',
+        kicker: 'Kontakt', title: 'Jak nas znaleźć',
+        address: 'Adres', phone: 'Telefon', hours: 'Doba hotelowa',
+        checkin: 'Zameldowanie', checkout: 'Wymeldowanie',
+        parking: 'Dojazd i parking',
+        parkingInfo: 'Pensjonat znajduje się przy murach miejskich, tuż przy starówce. Goście przyjeżdżający autem mają do dyspozycji bezpłatny parking. Oferujemy również transfer hotelowy.',
+        mapCta: 'Otwórz w Mapach Google',
+        transfer: 'Transfer', transferInfo: 'Transfer hotelowy na życzenie',
+      },
+      en: {
+        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navBook: 'Book now',
+        kicker: 'Contact', title: 'How to find us',
+        address: 'Address', phone: 'Phone', hours: 'Check-in / out',
+        checkin: 'Check-in', checkout: 'Check-out',
+        parking: 'Getting here & parking',
+        parkingInfo: 'The guesthouse stands by the medieval town walls, right next to the old town. Guests arriving by car can use our free parking. A hotel transfer is also available.',
+        mapCta: 'Open in Google Maps',
+        transfer: 'Transfer', transferInfo: 'Hotel transfer on request',
+      },
+    };
+
+    return {
+      t: T[lang],
+      otherLang: lang === 'pl' ? 'EN' : 'PL',
+      toggleLang: () => {
+        const next = lang === 'pl' ? 'en' : 'pl';
+        try { localStorage.setItem('ss-lang', next); } catch (e) {}
+        this.setState({ lang: next });
+      },
+      bookingUrl: this.props.bookingUrl ?? 'https://www.booking.com/hotel/pl/stary-spichrz.html',
+    };
+  }
+}
+</script>
+<template id="__bundler_thumbnail" data-bg-color="#FBF9F4">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(36,36)">
+<polygon points="24,0 48,20 0,20" fill="#17130F"></polygon>
+<rect x="4" y="20" width="40" height="28" fill="none" stroke="#17130F" stroke-width="4"></rect>
+<line x1="4" y1="20" x2="44" y2="48" stroke="#17130F" stroke-width="3"></line>
+<line x1="44" y1="20" x2="4" y2="48" stroke="#17130F" stroke-width="3"></line>
+</g>
+</svg>
+</template>
+</body>
+</html>

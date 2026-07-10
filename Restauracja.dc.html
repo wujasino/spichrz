@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Restauracja — Stary Spichrz, Chełmno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;padding:0;background:#FBF9F4;color:#1B1712;}
+    body{font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#1B1712;text-decoration:none;}
+    a:hover{color:#8A6A48;}
+    ::selection{background:#8A6A48;color:#fff;}
+  </style>
+</helmet>
+
+<div style="min-width:1100px">
+
+  <header data-screen-label="Nawigacja" style="position:sticky;top:0;z-index:50;background:rgba(251,249,244,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #E8E1D4">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+      <a href="Start.dc.html" style="display:flex;align-items:baseline;gap:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:0.02em">Stary Spichrz</span>
+        <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8A6A48">1797</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:34px;font-size:14px;letter-spacing:0.08em;text-transform:uppercase">
+        <a href="Start.dc.html">{{ t.navStart }}</a>
+        <a href="Pokoje.dc.html">{{ t.navRooms }}</a>
+        <a href="Restauracja.dc.html" style="color:#8A6A48">{{ t.navRest }}</a>
+        <a href="Galeria.dc.html">{{ t.navGallery }}</a>
+        <a href="Kontakt.dc.html">{{ t.navContact }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #D8CFBF;border-radius:999px;padding:7px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;color:#1B1712" style-hover="border-color:#8A6A48;color:#8A6A48">{{ otherLang }}</button>
+        <a href="tel:+48537311090" style="background:#17130F;color:#FBF9F4;padding:12px 26px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.navReserve }}</a>
+      </div>
+    </div>
+  </header>
+
+  <section data-screen-label="Nagłówek restauracji" style="max-width:1240px;margin:0 auto;padding:80px 40px 64px;text-align:center">
+    <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.kicker }}</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:60px;margin:0 0 22px">{{ t.title }}</h1>
+    <p style="font-size:18px;font-weight:300;line-height:1.75;color:#4E463C;max-width:660px;margin:0 auto;text-wrap:pretty">{{ t.intro }}</p>
+  </section>
+
+  <section data-screen-label="Zdjęcia restauracji" style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.4fr 1fr;gap:24px">
+    <div style="height:480px">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="rest-sala" shape="rect" placeholder="Zdjęcie sali restauracyjnej" hint-size="100%,480px" style="width:100%;height:100%"></x-import>
+    </div>
+    <div style="display:grid;grid-template-rows:1fr 1fr;gap:24px;height:480px">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="rest-danie" shape="rect" placeholder="Zdjęcie dania" hint-size="100%,228px" style="width:100%;height:100%"></x-import>
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="rest-bar" shape="rect" placeholder="Zdjęcie baru" hint-size="100%,228px" style="width:100%;height:100%"></x-import>
+    </div>
+  </section>
+
+  <section data-screen-label="Oferta restauracji" style="max-width:1240px;margin:0 auto;padding:100px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-left:1px solid #E8E1D4;border-top:1px solid #E8E1D4">
+    <sc-for list="{{ offers }}" as="o" hint-placeholder-count="3">
+      <div style="border-right:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4;padding:44px 40px">
+        <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#8A6A48;margin-bottom:16px">{{ o.kicker }}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;margin:0 0 14px">{{ o.title }}</h2>
+        <p style="font-size:16px;font-weight:300;line-height:1.7;color:#4E463C;margin:0;text-wrap:pretty">{{ o.desc }}</p>
+      </div>
+    </sc-for>
+  </section>
+
+  <section data-screen-label="Rezerwacja stolika" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:90px 40px;text-align:center">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;margin:0 0 18px;color:#FBF9F4">{{ t.ctaTitle }}</h2>
+      <p style="font-size:17px;font-weight:300;color:#B7AC9C;margin:0 0 36px">{{ t.ctaSub }}</p>
+      <a href="tel:+48537311090" style="background:#FBF9F4;color:#17130F;padding:16px 40px;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;display:inline-block" style-hover="background:#B99A72">537 311 090</a>
+    </div>
+  </section>
+
+  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4;border-top:1px solid #33291F">
+    <div style="max-width:1240px;margin:0 auto;padding:30px 40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:300;color:#B7AC9C">
+      <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
+      <span>Podmurna 7, 86-200 Chełmno · <a href="tel:+48537311090" style="color:#B99A72" style-hover="color:#FBF9F4">537 311 090</a></span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = localStorage.getItem('ss-lang'); } catch (e) {}
+    this.state = { lang: saved || 'pl' };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const T = {
+      pl: {
+        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navReserve: 'Zarezerwuj stolik',
+        kicker: 'Restauracja i bar', title: 'Kuchnia polska w sercu spichlerza',
+        intro: 'W zabytkowych wnętrzach z 1797 roku serwujemy domowe dania kuchni polskiej i regionalnej. Zapraszamy zarówno gości pensjonatu, jak i mieszkańców oraz turystów odwiedzających Chełmno.',
+        ctaTitle: 'Zarezerwuj stolik', ctaSub: 'Zadzwoń — chętnie przygotujemy stół dla Twojej rodziny lub grupy.',
+      },
+      en: {
+        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navReserve: 'Book a table',
+        kicker: 'Restaurant & bar', title: 'Polish cuisine at the heart of the granary',
+        intro: 'In historic interiors dating back to 1797 we serve homemade Polish and regional dishes. We welcome guesthouse guests as well as locals and visitors exploring Chełmno.',
+        ctaTitle: 'Book a table', ctaSub: 'Give us a call — we will gladly set a table for your family or group.',
+      },
+    };
+
+    const offersData = {
+      pl: [
+        { kicker: 'Codziennie rano', title: 'Śniadania', desc: 'Domowe śniadania wliczone w cenę pobytu dla gości pensjonatu.' },
+        { kicker: 'Obiady i kolacje', title: 'Kuchnia regionalna', desc: 'Dania kuchni polskiej przygotowywane na miejscu, ze świeżych składników.' },
+        { kicker: 'Wieczorem', title: 'Bar', desc: 'Wybór lokalnych i klasycznych trunków w kameralnej atmosferze spichlerza.' },
+      ],
+      en: [
+        { kicker: 'Every morning', title: 'Breakfast', desc: 'Homemade breakfast included in the rate for guesthouse guests.' },
+        { kicker: 'Lunch & dinner', title: 'Regional cuisine', desc: 'Polish dishes prepared on site from fresh ingredients.' },
+        { kicker: 'In the evening', title: 'Bar', desc: 'A selection of local and classic drinks in the intimate granary setting.' },
+      ],
+    };
+
+    return {
+      t: T[lang],
+      otherLang: lang === 'pl' ? 'EN' : 'PL',
+      toggleLang: () => {
+        const next = lang === 'pl' ? 'en' : 'pl';
+        try { localStorage.setItem('ss-lang', next); } catch (e) {}
+        this.setState({ lang: next });
+      },
+      offers: offersData[lang],
+    };
+  }
+}
+</script>
+</body>
+</html>

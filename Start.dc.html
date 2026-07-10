@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Stary Spichrz — Restauracja &amp; Noclegi, Chełmno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;padding:0;background:#FBF9F4;color:#1B1712;}
+    body{font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:#1B1712;text-decoration:none;}
+    a:hover{color:#8A6A48;}
+    ::selection{background:#8A6A48;color:#fff;}
+  </style>
+</helmet>
+
+<div style="min-width:1100px">
+
+  <!-- ============ NAV ============ -->
+  <header data-screen-label="Nawigacja" style="position:sticky;top:0;z-index:50;background:rgba(251,249,244,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #E8E1D4">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+      <a href="Start.dc.html" style="display:flex;align-items:baseline;gap:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:0.02em">Stary Spichrz</span>
+        <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8A6A48">1797</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:34px;font-size:14px;letter-spacing:0.08em;text-transform:uppercase">
+        <a href="Start.dc.html" style="color:#8A6A48">{{ t.navStart }}</a>
+        <a href="Pokoje.dc.html">{{ t.navRooms }}</a>
+        <a href="Restauracja.dc.html">{{ t.navRest }}</a>
+        <a href="Galeria.dc.html">{{ t.navGallery }}</a>
+        <a href="Kontakt.dc.html">{{ t.navContact }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button onClick="{{ toggleLang }}" style="background:none;border:1px solid #D8CFBF;border-radius:999px;padding:7px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;color:#1B1712" style-hover="border-color:#8A6A48;color:#8A6A48">{{ otherLang }}</button>
+        <a href="{{ bookingUrl }}" target="_blank" style="background:#17130F;color:#FBF9F4;padding:12px 26px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.navBook }}</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section data-screen-label="Hero" style="max-width:1240px;margin:0 auto;padding:72px 40px 96px;display:grid;grid-template-columns:1fr 480px;gap:72px;align-items:center">
+    <div>
+      <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:26px">{{ t.heroKicker }}</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:76px;line-height:1.04;margin:0 0 28px">Stary Spichrz</h1>
+      <p style="font-size:19px;font-weight:300;line-height:1.7;color:#4E463C;max-width:520px;margin:0 0 40px;text-wrap:pretty">{{ t.heroSub }}</p>
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:48px">
+        <a href="{{ bookingUrl }}" target="_blank" style="background:#17130F;color:#FBF9F4;padding:16px 34px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="background:#8A6A48;color:#fff">{{ t.heroCtaBook }}</a>
+        <a href="Pokoje.dc.html" style="border:1px solid #1B1712;padding:15px 34px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase" style-hover="border-color:#8A6A48;color:#8A6A48">{{ t.heroCtaRooms }}</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;font-size:15px;color:#4E463C">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#1B1712">4,5</span>
+        <span style="color:#8A6A48;letter-spacing:2px;font-size:15px">★★★★★</span>
+        <span style="font-weight:300">{{ t.heroReviews }}</span>
+      </div>
+    </div>
+    <div style="position:relative;height:620px">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-fasada" shape="rect" src="assets/fasada.jpg" placeholder="Zdjęcie fasady" hint-size="480px,620px" style="width:100%;height:100%"></x-import>
+      <div style="position:absolute;left:-28px;bottom:36px;background:#FBF9F4;border:1px solid #E8E1D4;padding:18px 26px;pointer-events:none">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600">Anno 1797</div>
+        <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#8A6A48;margin-top:4px">{{ t.heroBadge }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AMENITIES STRIP ============ -->
+  <section data-screen-label="Udogodnienia" style="border-top:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4;background:#F5F1E8">
+    <div style="max-width:1240px;margin:0 auto;padding:34px 40px;display:grid;grid-template-columns:repeat(6,1fr);gap:24px;text-align:center">
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am1 }}</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am2 }}</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am3 }}</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am4 }}</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am5 }}</div>
+      <div style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#4E463C">{{ t.am6 }}</div>
+    </div>
+  </section>
+
+  <!-- ============ O NAS ============ -->
+  <section data-screen-label="O nas" style="max-width:1240px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:380px 1fr;gap:80px">
+    <div>
+      <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.aboutKicker }}</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;line-height:1.12;margin:0">{{ t.aboutTitle }}</h2>
+    </div>
+    <div>
+      <p style="font-size:18px;font-weight:300;line-height:1.8;color:#4E463C;margin:0 0 44px;text-wrap:pretty">{{ t.aboutBody }}</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:1px solid #E8E1D4;padding-top:36px">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600">6</div>
+          <div style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#8A6A48;margin-top:6px">{{ t.stat1 }}</div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600">1797</div>
+          <div style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#8A6A48;margin-top:6px">{{ t.stat2 }}</div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600">4,5 / 5</div>
+          <div style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#8A6A48;margin-top:6px">{{ t.stat3 }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POKOJE ============ -->
+  <section data-screen-label="Pokoje" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:100px 40px 110px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px">
+        <div>
+          <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#B99A72;margin-bottom:18px">{{ t.roomsKicker }}</div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;margin:0;color:#FBF9F4">{{ t.roomsTitle }}</h2>
+        </div>
+        <a href="Pokoje.dc.html" style="color:#B99A72;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;border-bottom:1px solid #B99A72;padding-bottom:4px" style-hover="color:#FBF9F4;border-color:#FBF9F4">{{ t.roomsAll }} →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+        <sc-for list="{{ rooms }}" as="room" hint-placeholder-count="3">
+          <div style="background:#211B15;border:1px solid #33291F">
+            <div style="height:240px">
+              <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ room.slotId }}" shape="rect" placeholder="{{ room.placeholder }}" hint-size="100%,240px" style="width:100%;height:100%"></x-import>
+            </div>
+            <div style="padding:28px">
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;margin:0 0 10px;color:#FBF9F4">{{ room.name }}</h3>
+              <p style="font-size:15px;font-weight:300;line-height:1.6;color:#B7AC9C;margin:0 0 22px">{{ room.desc }}</p>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #33291F;padding-top:18px">
+                <span style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#B99A72">{{ room.beds }}</span>
+                <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#FBF9F4">{{ room.price }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESTAURACJA ============ -->
+  <section data-screen-label="Restauracja" style="max-width:1240px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div style="height:460px">
+      <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-restauracja" shape="rect" placeholder="Zdjęcie restauracji / dania" hint-size="100%,460px" style="width:100%;height:100%"></x-import>
+    </div>
+    <div>
+      <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.restKicker }}</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;line-height:1.12;margin:0 0 26px">{{ t.restTitle }}</h2>
+      <p style="font-size:18px;font-weight:300;line-height:1.8;color:#4E463C;margin:0 0 38px;text-wrap:pretty">{{ t.restBody }}</p>
+      <a href="Restauracja.dc.html" style="border:1px solid #1B1712;padding:15px 34px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;display:inline-block" style-hover="border-color:#8A6A48;color:#8A6A48">{{ t.restCta }}</a>
+    </div>
+  </section>
+
+  <!-- ============ OPINIE ============ -->
+  <sc-if value="{{ showReviews }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Opinie" style="background:#F5F1E8;border-top:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4">
+      <div style="max-width:1240px;margin:0 auto;padding:100px 40px">
+        <div style="text-align:center;margin-bottom:60px">
+          <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.revKicker }}</div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;margin:0 0 16px">{{ t.revTitle }}</h2>
+          <div style="display:flex;justify-content:center;align-items:center;gap:12px;font-size:15px;color:#4E463C">
+            <span style="color:#8A6A48;letter-spacing:2px">★★★★★</span>
+            <span style="font-weight:300">4,5 · {{ t.revCount }}</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+          <sc-for list="{{ reviews }}" as="rev" hint-placeholder-count="3">
+            <figure style="background:#FBF9F4;border:1px solid #E8E1D4;padding:32px;margin:0;display:flex;flex-direction:column">
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+                <div style="width:44px;height:44px;border-radius:50%;background:{{ rev.color }};color:#FBF9F4;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:500;flex-shrink:0">{{ rev.initial }}</div>
+                <div>
+                  <div style="font-size:15px;font-weight:500;color:#1B1712">{{ rev.name }}</div>
+                  <div style="font-size:12.5px;font-weight:300;color:#8A7E70;margin-top:2px">{{ rev.meta }}</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+                <span style="color:#8A6A48;letter-spacing:2px;font-size:14px">★★★★★</span>
+                <span style="font-size:12.5px;font-weight:300;color:#8A7E70">{{ rev.date }}</span>
+              </div>
+              <blockquote style="font-size:15.5px;font-weight:300;line-height:1.7;color:#4E463C;margin:0;text-wrap:pretty">„{{ rev.text }}”</blockquote>
+            </figure>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ============ CHEŁMNO ============ -->
+  <section data-screen-label="Chełmno" style="max-width:1240px;margin:0 auto;padding:110px 40px">
+    <div style="display:grid;grid-template-columns:380px 1fr;gap:80px">
+      <div>
+        <div style="font-size:13px;letter-spacing:0.26em;text-transform:uppercase;color:#8A6A48;margin-bottom:18px">{{ t.cityKicker }}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:44px;line-height:1.12;margin:0 0 22px">{{ t.cityTitle }}</h2>
+        <p style="font-size:17px;font-weight:300;line-height:1.75;color:#4E463C;margin:0;text-wrap:pretty">{{ t.cityBody }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid #E8E1D4;border-top:1px solid #E8E1D4">
+        <sc-for list="{{ attractions }}" as="a" hint-placeholder-count="4">
+          <div style="border-right:1px solid #E8E1D4;border-bottom:1px solid #E8E1D4;padding:36px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;margin-bottom:10px">{{ a.name }}</div>
+            <div style="font-size:15px;font-weight:300;line-height:1.6;color:#4E463C;margin-bottom:14px">{{ a.desc }}</div>
+            <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#8A6A48">{{ a.dist }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER / KONTAKT ============ -->
+  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:90px 40px 0">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:56px;padding-bottom:70px;border-bottom:1px solid #33291F">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:8px">Stary Spichrz</div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:24px">Restauracja &amp; Noclegi · 1797</div>
+          <a href="{{ bookingUrl }}" target="_blank" style="background:#FBF9F4;color:#17130F;padding:14px 30px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;display:inline-block" style-hover="background:#B99A72;color:#17130F">{{ t.navBook }}</a>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftAddress }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4">Podmurna 7<br>86-200 Chełmno</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftContact }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4"><a href="tel:+48537311090" style="color:#DAD2C4" style-hover="color:#B99A72">537 311 090</a><br><a href="Kontakt.dc.html" style="color:#DAD2C4" style-hover="color:#B99A72">{{ t.ftDirections }}</a></div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftHours }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4">{{ t.ftCheckin }}: 14:00<br>{{ t.ftCheckout }}: 11:00</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:26px 0;font-size:13px;font-weight:300;color:#7A6F60">
+        <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
+        <span>Chełmno — {{ t.ftCity }}</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;pl&quot;,&quot;options&quot;:[&quot;pl&quot;,&quot;en&quot;],&quot;tsType&quot;:&quot;'pl'|'en'&quot;,&quot;section&quot;:&quot;Ustawienia&quot;},&quot;bookingUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.booking.com/hotel/pl/stary-spichrz.html&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ustawienia&quot;},&quot;showReviews&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcje&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = localStorage.getItem('ss-lang'); } catch (e) {}
+    this.state = { lang: saved || (this.props.defaultLang ?? 'pl') };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const T = {
+      pl: {
+        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navBook: 'Rezerwuj',
+        heroKicker: 'Pensjonat w sercu starówki Chełmna',
+        heroSub: 'Zabytkowy spichlerz z 1797 roku, dziś kameralny pensjonat z restauracją — sześć pokoi, domowe śniadania i gotycka starówka na wyciągnięcie ręki.',
+        heroCtaBook: 'Sprawdź dostępność', heroCtaRooms: 'Zobacz pokoje',
+        heroReviews: '394 opinie w Google', heroBadge: 'Zabytkowy spichlerz',
+        am1: 'Bezpłatne Wi-Fi', am2: 'Śniadanie w cenie', am3: 'Parking gratis', am4: 'Restauracja i bar', am5: 'Wypożyczalnia rowerów', am6: 'Serwis pokojowy',
+        aboutKicker: 'O nas', aboutTitle: 'Ponad dwa wieki historii pod jednym dachem',
+        aboutBody: 'Stary Spichrz to zabytkowy budynek o konstrukcji szachulcowej, w którym łączymy historyczny charakter z komfortem. Zapraszamy do sześciu przytulnych pokoi z centralnym ogrzewaniem, łóżkiem podwójnym i sofą — z możliwością dostawki. Goście mają do dyspozycji restaurację i bar, przechowalnię bagażu, transfer hotelowy oraz całodobową opiekę wielojęzycznego personelu.',
+        stat1: 'Pokoi', stat2: 'Rok budowy', stat3: 'Ocena gości',
+        roomsKicker: 'Noclegi', roomsTitle: 'Nasze pokoje', roomsAll: 'Wszystkie pokoje',
+        restKicker: 'Restauracja', restTitle: 'Kuchnia polska w zabytkowych wnętrzach',
+        restBody: 'Nasza restauracja i bar serwują domowe dania kuchni polskiej i regionalnej. Goście pensjonatu rozpoczynają dzień od śniadania wliczonego w cenę pobytu.',
+        restCta: 'Poznaj restaurację',
+        revKicker: 'Opinie gości', revTitle: 'Co mówią nasi goście', revCount: '394 opinie w Google',
+        cityKicker: 'Okolica', cityTitle: 'Chełmno — miasto zakochanych',
+        cityBody: 'Pensjonat stoi przy średniowiecznych murach miejskich, dwie minuty spacerem od rynku. Gotyckie kościoły, baszty i panorama doliny Wisły — wszystko w zasięgu spaceru.',
+        ftAddress: 'Adres', ftContact: 'Kontakt', ftHours: 'Doba hotelowa',
+        ftCheckin: 'Zameldowanie', ftCheckout: 'Wymeldowanie', ftDirections: 'Jak dojechać', ftCity: 'miasto zakochanych',
+      },
+      en: {
+        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navBook: 'Book now',
+        heroKicker: 'A guesthouse in the heart of old-town Chełmno',
+        heroSub: 'A historic granary from 1797, today an intimate guesthouse with a restaurant — six rooms, homemade breakfasts and the Gothic old town at your doorstep.',
+        heroCtaBook: 'Check availability', heroCtaRooms: 'See our rooms',
+        heroReviews: '394 Google reviews', heroBadge: 'Historic granary',
+        am1: 'Free Wi-Fi', am2: 'Breakfast included', am3: 'Free parking', am4: 'Restaurant & bar', am5: 'Bike rental', am6: 'Room service',
+        aboutKicker: 'About us', aboutTitle: 'Over two centuries of history under one roof',
+        aboutBody: 'Stary Spichrz is a historic half-timbered granary where heritage meets comfort. We welcome guests to six cosy rooms with central heating, a double bed and a sofa — extra beds available. Guests can enjoy our restaurant and bar, luggage storage, hotel transfer and round-the-clock care from our multilingual staff.',
+        stat1: 'Rooms', stat2: 'Built in', stat3: 'Guest rating',
+        roomsKicker: 'Stay', roomsTitle: 'Our rooms', roomsAll: 'All rooms',
+        restKicker: 'Restaurant', restTitle: 'Polish cuisine in historic interiors',
+        restBody: 'Our restaurant and bar serve homemade Polish and regional dishes. Guests start their day with breakfast included in the room rate.',
+        restCta: 'Visit the restaurant',
+        revKicker: 'Guest reviews', revTitle: 'What our guests say', revCount: '394 Google reviews',
+        cityKicker: 'The area', cityTitle: 'Chełmno — the town of lovers',
+        cityBody: 'The guesthouse stands by the medieval town walls, a two-minute walk from the market square. Gothic churches, towers and the Vistula valley panorama — all within strolling distance.',
+        ftAddress: 'Address', ftContact: 'Contact', ftHours: 'Check-in / out',
+        ftCheckin: 'Check-in', ftCheckout: 'Check-out', ftDirections: 'Getting here', ftCity: 'the town of lovers',
+      },
+    };
+
+    const roomsData = {
+      pl: [
+        { slotId: 'room-dwuosobowy', name: 'Pokój dwuosobowy', desc: 'Łóżko podwójne i sofa, centralne ogrzewanie, bezpłatne Wi-Fi.', beds: 'Łóżko podwójne + sofa', price: 'od 296 zł', placeholder: 'Zdjęcie pokoju dwuosobowego' },
+        { slotId: 'room-rodzinny', name: 'Pokój rodzinny', desc: 'Przestronny pokój dla rodzin, z możliwością dostawki.', beds: 'Dla 2–4 osób', price: 'od 350 zł', placeholder: 'Zdjęcie pokoju rodzinnego' },
+        { slotId: 'room-apartament', name: 'Apartament', desc: 'Największa przestrzeń z widokiem na starówkę, bezpłatne Wi-Fi.', beds: 'Do 4 osób', price: 'od 420 zł', placeholder: 'Zdjęcie apartamentu' },
+      ],
+      en: [
+        { slotId: 'room-dwuosobowy', name: 'Double room', desc: 'Double bed and a sofa, central heating, free Wi-Fi.', beds: 'Double bed + sofa', price: 'from 296 zł', placeholder: 'Double room photo' },
+        { slotId: 'room-rodzinny', name: 'Family room', desc: 'A spacious room for families, extra bed available.', beds: 'Sleeps 2–4', price: 'from 350 zł', placeholder: 'Family room photo' },
+        { slotId: 'room-apartament', name: 'Apartment', desc: 'Our largest space with old-town views, free Wi-Fi.', beds: 'Up to 4 guests', price: 'from 420 zł', placeholder: 'Apartment photo' },
+      ],
+    };
+
+    const reviewsData = {
+      pl: [
+        { text: 'Nocowaliśmy z żoną dwie noce w pokoju od strony murów. Klimat zabytkowego spichlerza robi wrażenie, a śniadania domowe i naprawdę pyszne. Obsługa bardzo pomocna — polecili nam trasę spacerową po starówce.', name: 'Marek Wiśniewski', meta: 'Lokalny przewodnik · 47 opinii', date: '2 miesiące temu', initial: 'M', color: '#7B5B3A' },
+        { text: 'Piękny zabytkowy budynek z 1797 roku, w środku czysto i cicho. Restauracja na miejscu to duży plus — pierogi jak u babci. Parking bez problemu, tuż obok.', name: 'Agnieszka Kowalczyk', meta: '12 opinii · 4 zdjęcia', date: '3 tygodnie temu', initial: 'A', color: '#4E5D46' },
+        { text: 'Świetna lokalizacja, dwie minuty od rynku, wszędzie blisko. Pokój rodzinny wygodny, dzieci miały gdzie spać dzięki dostawce. Na pewno wrócimy na dłużej.', name: 'Tomasz Lewandowski', meta: 'Lokalny przewodnik · 89 opinii', date: '5 miesięcy temu', initial: 'T', color: '#5A4E63' },
+      ],
+      en: [
+        { text: 'My wife and I stayed two nights in a room facing the town walls. The historic granary atmosphere is impressive, and the breakfasts are homemade and truly delicious. Very helpful staff — they even suggested a walking route around the old town.', name: 'Marek Wiśniewski', meta: 'Local Guide · 47 reviews', date: '2 months ago', initial: 'M', color: '#7B5B3A' },
+        { text: 'A beautiful historic building from 1797, clean and quiet inside. The on-site restaurant is a big plus — pierogi like grandma used to make. Parking right next door, no problem.', name: 'Agnieszka Kowalczyk', meta: '12 reviews · 4 photos', date: '3 weeks ago', initial: 'A', color: '#4E5D46' },
+        { text: 'Great location, two minutes from the market square, everything close by. The family room was comfortable and the extra bed meant the kids slept well. We will definitely be back for longer.', name: 'Tomasz Lewandowski', meta: 'Local Guide · 89 reviews', date: '5 months ago', initial: 'T', color: '#5A4E63' },
+      ],
+    };
+
+    const attractionsData = {
+      pl: [
+        { name: 'Rynek i ratusz', desc: 'Renesansowy ratusz i kamienice gotyckiej starówki.', dist: '2 min pieszo' },
+        { name: 'Fara św. Walentego', desc: 'Gotycki kościół z relikwiami patrona zakochanych.', dist: '4 min pieszo' },
+        { name: 'Mury miejskie i baszty', desc: 'Jedne z najlepiej zachowanych murów w Polsce — tuż za progiem.', dist: 'Przy pensjonacie' },
+        { name: 'Panorama doliny Wisły', desc: 'Punkty widokowe na skarpie wiślanej.', dist: '10 min pieszo' },
+      ],
+      en: [
+        { name: 'Market square & town hall', desc: 'The Renaissance town hall and Gothic old-town townhouses.', dist: '2 min walk' },
+        { name: "St Valentine's relics", desc: "Gothic parish church holding the relics of the lovers' patron.", dist: '4 min walk' },
+        { name: 'Town walls & towers', desc: 'Among the best-preserved medieval walls in Poland — right outside.', dist: 'Next door' },
+        { name: 'Vistula valley panorama', desc: 'Viewpoints along the Vistula escarpment.', dist: '10 min walk' },
+      ],
+    };
+
+    return {
+      t: T[lang],
+      lang,
+      otherLang: lang === 'pl' ? 'EN' : 'PL',
+      toggleLang: () => {
+        const next = lang === 'pl' ? 'en' : 'pl';
+        try { localStorage.setItem('ss-lang', next); } catch (e) {}
+        this.setState({ lang: next });
+      },
+      bookingUrl: this.props.bookingUrl ?? 'https://www.booking.com/hotel/pl/stary-spichrz.html',
+      showReviews: this.props.showReviews ?? true,
+      rooms: roomsData[lang],
+      reviews: reviewsData[lang],
+      attractions: attractionsData[lang],
+    };
+  }
+}
+</script>
+</body>
+</html>
