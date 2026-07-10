@@ -76,17 +76,38 @@
     </div>
   </section>
 
-  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4;border-top:1px solid #33291F">
-    <div style="max-width:1240px;margin:0 auto;padding:30px 40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:300;color:#B7AC9C">
-      <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
-      <span>Podmurna 7, 86-200 Chełmno · <a href="tel:+48537311090" style="color:#B99A72" style-hover="color:#FBF9F4">537 311 090</a></span>
+  <footer data-screen-label="Stopka" style="background:#17130F;color:#FBF9F4">
+    <div style="max-width:1240px;margin:0 auto;padding:90px 40px 0">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:56px;padding-bottom:70px;border-bottom:1px solid #33291F">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:8px">Stary Spichrz</div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:24px">Restauracja &amp; Noclegi · 1797</div>
+          <a href="{{ bookingUrl }}" target="_blank" style="background:#FBF9F4;color:#17130F;padding:14px 30px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;display:inline-block" style-hover="background:#B99A72;color:#17130F">{{ t.navBook }}</a>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftAddress }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4">Podmurna 7<br>86-200 Chełmno</div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftContact }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4"><a href="tel:+48537311090" style="color:#DAD2C4" style-hover="color:#B99A72">537 311 090</a><br><a href="Kontakt.dc.html" style="color:#DAD2C4" style-hover="color:#B99A72">{{ t.ftDirections }}</a></div>
+        </div>
+        <div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#B99A72;margin-bottom:20px">{{ t.ftHours }}</div>
+          <div style="font-size:16px;font-weight:300;line-height:1.8;color:#DAD2C4">{{ t.ftCheckin }}: 14:00<br>{{ t.ftCheckout }}: 11:00</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:26px 0;font-size:13px;font-weight:300;color:#7A6F60">
+        <span>© 2026 Stary Spichrz Restauracja &amp; Noclegi</span>
+        <span>Chełmno — {{ t.ftCity }}</span>
+      </div>
     </div>
   </footer>
 
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script>
+<script type="text/x-dc" data-dc-script data-props="{&quot;bookingUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.booking.com/hotel/pl/stary-spichrz.html&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ustawienia&quot;}}">
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -99,16 +120,20 @@ class Component extends DCLogic {
     const lang = this.state.lang;
     const T = {
       pl: {
-        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navReserve: 'Zarezerwuj stolik',
+        navStart: 'Start', navRooms: 'Pokoje', navRest: 'Restauracja', navGallery: 'Galeria', navContact: 'Kontakt', navReserve: 'Zarezerwuj stolik', navBook: 'Rezerwuj',
         kicker: 'Restauracja i bar', title: 'Kuchnia polska w sercu spichlerza',
         intro: 'W zabytkowych wnętrzach z 1797 roku serwujemy domowe dania kuchni polskiej i regionalnej. Zapraszamy zarówno gości pensjonatu, jak i mieszkańców oraz turystów odwiedzających Chełmno.',
         ctaTitle: 'Zarezerwuj stolik', ctaSub: 'Zadzwoń — chętnie przygotujemy stół dla Twojej rodziny lub grupy.',
+        ftAddress: 'Adres', ftContact: 'Kontakt', ftHours: 'Doba hotelowa',
+        ftCheckin: 'Zameldowanie', ftCheckout: 'Wymeldowanie', ftDirections: 'Jak dojechać', ftCity: 'miasto zakochanych',
       },
       en: {
-        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navReserve: 'Book a table',
+        navStart: 'Home', navRooms: 'Rooms', navRest: 'Restaurant', navGallery: 'Gallery', navContact: 'Contact', navReserve: 'Book a table', navBook: 'Book now',
         kicker: 'Restaurant & bar', title: 'Polish cuisine at the heart of the granary',
         intro: 'In historic interiors dating back to 1797 we serve homemade Polish and regional dishes. We welcome guesthouse guests as well as locals and visitors exploring Chełmno.',
         ctaTitle: 'Book a table', ctaSub: 'Give us a call — we will gladly set a table for your family or group.',
+        ftAddress: 'Address', ftContact: 'Contact', ftHours: 'Check-in / out',
+        ftCheckin: 'Check-in', ftCheckout: 'Check-out', ftDirections: 'Getting here', ftCity: 'the town of lovers',
       },
     };
 
@@ -134,6 +159,7 @@ class Component extends DCLogic {
         this.setState({ lang: next });
       },
       offers: offersData[lang],
+      bookingUrl: this.props.bookingUrl ?? 'https://www.booking.com/hotel/pl/stary-spichrz.html',
     };
   }
 }
