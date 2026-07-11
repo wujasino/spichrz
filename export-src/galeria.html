@@ -189,7 +189,10 @@ class Component extends DCLogic {
 </div>
 <script>
 (function(){
-  var LANG = (function(){ try { return localStorage.getItem('ss-lang') || 'pl'; } catch(e){ return 'pl'; } })();
+  function getStoredLang(){
+    try { return localStorage.getItem('ss-lang') || 'pl'; } catch(e){ return 'pl'; }
+  }
+  var LANG = getStoredLang();
 
   var STR = {
     pl: {
@@ -197,14 +200,16 @@ class Component extends DCLogic {
       placeholder: 'Napisz wiadomość…',
       send: 'Wyślij',
       quick: ['Ceny pokoi', 'Zameldowanie', 'Parking', 'Rezerwacja'],
-      fallback: 'Nie mam gotowej odpowiedzi na to pytanie 🙂 Zadzwoń do nas: 537 311 090 albo zarezerwuj online — chętnie pomożemy!'
+      fallback: 'Nie mam gotowej odpowiedzi na to pytanie 🙂 Zadzwoń do nas: 537 311 090 albo zarezerwuj online — chętnie pomożemy!',
+      langNote: 'Język czatu: polski.'
     },
     en: {
       greeting: "Hi! 👋 I'm the virtual assistant of Stary Spichrz. Ask me about prices, hours, parking, breakfast or booking.",
       placeholder: 'Type a message…',
       send: 'Send',
       quick: ['Room prices', 'Check-in', 'Parking', 'Booking'],
-      fallback: "I don't have a ready answer for that 🙂 Call us: 537 311 090 or book online — happy to help!"
+      fallback: "I don't have a ready answer for that 🙂 Call us: 537 311 090 or book online — happy to help!",
+      langNote: 'Chat language: English.'
     }
   };
 
@@ -264,9 +269,7 @@ class Component extends DCLogic {
   var quick = document.getElementById('ss-chat-quick');
   var form = document.getElementById('ss-chat-form');
   var input = document.getElementById('ss-chat-input');
-
-  input.placeholder = STR[LANG].placeholder;
-  form.querySelector('button[type=submit]').textContent = STR[LANG].send;
+  var submitBtn = form.querySelector('button[type=submit]');
 
   function addMsg(text, who){
     var d = document.createElement('div');
@@ -276,20 +279,36 @@ class Component extends DCLogic {
     body.scrollTop = body.scrollHeight;
   }
 
+  function renderQuick(){
+    quick.innerHTML = '';
+    STR[LANG].quick.forEach(function(label){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.addEventListener('click', function(){ ask(label); });
+      quick.appendChild(b);
+    });
+  }
+
   var opened = false;
+
+  function applyLang(showNote){
+    input.placeholder = STR[LANG].placeholder;
+    submitBtn.textContent = STR[LANG].send;
+    if (opened){
+      renderQuick();
+      if (showNote) addMsg(STR[LANG].langNote, 'bot');
+    }
+  }
+  applyLang(false);
+
   function openChat(){
     panel.hidden = false;
     toggle.setAttribute('aria-expanded', 'true');
     if (!opened){
       opened = true;
       addMsg(STR[LANG].greeting, 'bot');
-      STR[LANG].quick.forEach(function(label){
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = label;
-        b.addEventListener('click', function(){ ask(label); });
-        quick.appendChild(b);
-      });
+      renderQuick();
     }
     input.focus();
   }
@@ -313,6 +332,16 @@ class Component extends DCLogic {
     e.preventDefault();
     ask(input.value);
   });
+
+  // The page's own PL/EN toggle only re-renders its own component, so poll
+  // localStorage to pick up a language switch made elsewhere on the page.
+  setInterval(function(){
+    var current = getStoredLang();
+    if (current !== LANG){
+      LANG = current;
+      applyLang(true);
+    }
+  }, 400);
 })();
 </script>
 </body>
